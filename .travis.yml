@@ -1,0 +1,12 @@
+sudo: required
+services:
+  - docker
+
+# series of commands that get executed before our tests run
+before_install:
+  - docker build -t davidkwan/docker-react -f Dockerfile.dev .
+
+# contains commands to run test suite
+# only cares about status code returned
+script:
+  - docker run davidkwan/docker-react npm run test -- --coverage
